@@ -1,0 +1,56 @@
+.cartItemContainer {
+	display: flex;
+	margin: 10px;
+	background-color: rgb(222, 222, 222);
+	width: 500px;
+}
+
+.cartItemImgContainer {
+	height: 150px;
+	aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.cartItemContainer img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.cartItemContainer .inputDiv {
+	height: 50px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    padding: 10px;
+}
+
+.inputDiv button{
+    height: 30px;
+    aspect-ratio: 1/1;
+}
+
+.control {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.control input{
+    width: 50px;
+    
+}
+
+.delete {
+    position: absolute;
+    right: -28px;
+    top: 0;
+}
+
+.name {
+    font-weight: bolder;
+}

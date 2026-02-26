@@ -36,6 +36,7 @@ const NavigationBar = () => {
 				(item) => new Product(item.title, item.price, 0, item.image),
 			);
 			setItems(newItems);
+			
 		};
 		fetchData().catch((err) => {
 			console.log(err);
@@ -43,6 +44,7 @@ const NavigationBar = () => {
 	}, []);
 
 	let itemCount = 0;
+
 	items.forEach((item) => (itemCount += item.amount));
 
 	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒 `;
