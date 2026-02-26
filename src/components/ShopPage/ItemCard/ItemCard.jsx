@@ -1,20 +1,54 @@
+import styles from './ItemCard.module.css';
+import { useState } from 'react';
+
 const ItemCard = ({
-	increment,
-	decrement,
-	addToCard,
-	amount,
-	item,
+	item, setItemAmount
 }) => {
+	const [itemCount, setItemCount] = useState([item.amount]);
+	
+
+	const handleDecrement = () => {
+		if (itemCount > 0) {
+			setItemCount((prev) => Number(prev) - 1);
+		}
+	};
+
+	const handleAddToCart = () => {
+		setItemAmount(item.name, item.amount + Number(itemCount))
+	}
+
 	return (
-		<div>
+		<div className={styles.itemCardContainer}>
 			<img src={item.im} alt={`Image of ${item.name}`} />
 
-			{item.name}
-			<div>
-				<button >+</button>
-				<button>-</button>
-				<input type="number" name="" id="" />
-                <button>Add to Cart</button>
+			<div className={styles.itemLabel}>
+				{item.name + ` $${item.price}`}
+			</div>
+			<div className={styles.controlDiv}>
+				<button
+					onClick={() =>
+						setItemCount((prev) => Number(prev) + 1)
+					}
+					className={styles.add}
+				>
+					+
+				</button>
+				<button
+					onClick={handleDecrement}
+					className={styles.minus}
+				>
+					-
+				</button>
+				<input
+					type="number"
+					name=""
+					id=""
+					value={itemCount}
+					onChange={(e) => setItemCount(e.target.value)}
+				/>
+				<button onClick={handleAddToCart} className={styles.addToCart}>
+					Add to Cart
+				</button>
 			</div>
 		</div>
 	);

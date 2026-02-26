@@ -1,0 +1,41 @@
+/* .controlDiv {
+    
+
+} */
+.itemLabel{
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+
+}
+
+.itemCardContainer {
+    aspect-ratio: 1/1;
+    min-width: 30vw;
+    background-color: black;
+    color: white;
+}
+
+
+.itemCardContainer img{
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+
+.controlDiv {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+}
+
+.add, .minus{
+    height: 100%;
+    aspect-ratio: 1/1;
+    width: auto
+}
+
+.itemCardContainer input{
+    max-width: 20%;
+}
