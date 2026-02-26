@@ -16,6 +16,17 @@ class Product {
 const NavigationBar = () => {
 	const [items, setItems] = useState([]);
 
+	function setItemAmount(productName, amount) {
+		let newItems = items.map((item) => {
+			if (item.name === productName) {
+				item.amount = amount;
+			}
+
+			return item;
+		});
+		setItems(newItems);
+	}
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch("https://fakestoreapi.com/products");
@@ -30,16 +41,11 @@ const NavigationBar = () => {
 			console.log(err);
 		});
 	}, []);
-	
-	
-	console.table(items);
 
 	let itemCount = 0;
 	items.forEach((item) => (itemCount += item.amount));
 
 	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒 `;
-
-	console.log(itemCount);
 
 	return (
 		<div className={styles.pageContainer}>
@@ -47,19 +53,14 @@ const NavigationBar = () => {
 				<Link className={styles.link} to="/">
 					Home
 				</Link>
-				<Link
-					items={items}
-					setItems={setItems}
-					className={styles.link}
-					to="shop"
-				>
+				<Link className={styles.link} to="shop">
 					Shop
 				</Link>
 				<Link className={styles.link} to="cart">
 					{cartLabel}
 				</Link>
 			</div>
-			<Outlet context={[items, setItems]} />
+			<Outlet context={[items, setItems, setItemAmount]} />
 		</div>
 	);
 };

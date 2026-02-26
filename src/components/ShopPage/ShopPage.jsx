@@ -1,22 +1,10 @@
-import styles from './ShopPage.module.css';
-import { useState, useEffect } from 'react';
-import ItemCard from './ItemCard/ItemCard';
-import {useOutletContext} from 'react-router'
-
+import styles from "./ShopPage.module.css";
+import { useState, useEffect } from "react";
+import ItemCard from "./ItemCard/ItemCard";
+import { useOutletContext } from "react-router";
 
 const ShopPage = () => {
-	const [items, setItems] = useOutletContext();
-
-	function setItemAmount(productName, amount){
-		let newItems = items.map((item) => {
-			if (item.name === productName){
-				item.amount = amount
-			}
-
-			return item
-		})
-		setItems(newItems)
-	}
+	const [items, setItemAmount] = useOutletContext();
 
 	return (
 		<div className={styles.shopContainer}>
@@ -26,7 +14,13 @@ const ShopPage = () => {
 			</div> */}
 			<div className={styles.productDisplay}>
 				{items.map((item) => {
-					return <ItemCard key={item.name} item={item} setItemAmount={setItemAmount} />;
+					return (
+						<ItemCard
+							key={item.name}
+							item={item}
+							setItemAmount={setItemAmount}
+						/>
+					);
 				})}
 			</div>
 		</div>
