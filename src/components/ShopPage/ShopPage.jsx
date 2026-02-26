@@ -19,11 +19,11 @@ const ShopPage = () => {
 	}
 
 	return (
-		<div>
-			<div>
+		<div className={styles.shopContainer}>
+			{/* <div className={styles.shopTitle}>
 				<h2>Ok, I lied we only sell delicous desserts</h2>
 				<h3>Have a looks!</h3>
-			</div>
+			</div> */}
 			<div className={styles.productDisplay}>
 				{items.map((item) => {
 					return <ItemCard key={item.name} item={item} setItemAmount={setItemAmount} />;

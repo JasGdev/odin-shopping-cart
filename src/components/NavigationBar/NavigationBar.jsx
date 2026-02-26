@@ -1,8 +1,8 @@
-import { Outlet, Link } from 'react-router';
-import styles from './NavigationBar.module.css';
-import { useState } from 'react';
-import donutImg from '../../assets/donut.jpg';
-import chocoImg from '../../assets/choco.jpg';
+import { Outlet, Link } from "react-router";
+import styles from "./NavigationBar.module.css";
+import { useState, useEffect } from "react";
+import donutImg from "../../assets/donut.jpg";
+import chocoImg from "../../assets/choco.jpg";
 
 class Product {
 	constructor(name, price, amount, img) {
@@ -14,14 +14,30 @@ class Product {
 }
 
 const NavigationBar = () => {
-	const [items, setItems] = useState([
-		new Product('Donut', 3, 0, donutImg),
-		new Product('Chocolate', 5, 0, chocoImg),
-	]);
+	const [items, setItems] = useState([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await fetch("https://fakestoreapi.com/products");
+			const data = await response.json();
+
+			const newItems = data.map(
+				(item) => new Product(item.title, item.price, 0, item.image),
+			);
+			setItems(newItems);
+		};
+		fetchData().catch((err) => {
+			console.log(err);
+		});
+	}, []);
+	
+	
+	console.table(items);
+
 	let itemCount = 0;
 	items.forEach((item) => (itemCount += item.amount));
 
-	const cartLabel = itemCount == 0? 'Cart' : `${itemCount} in Cart `
+	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒 `;
 
 	console.log(itemCount);
 
@@ -40,7 +56,6 @@ const NavigationBar = () => {
 					Shop
 				</Link>
 				<Link className={styles.link} to="cart">
-					
 					{cartLabel}
 				</Link>
 			</div>

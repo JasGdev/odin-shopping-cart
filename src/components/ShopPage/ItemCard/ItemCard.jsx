@@ -47,7 +47,7 @@ const ItemCard = ({
 					onChange={(e) => setItemCount(e.target.value)}
 				/>
 				<button onClick={handleAddToCart} className={styles.addToCart}>
-					Add to Cart
+					🛒
 				</button>
 			</div>
 		</div>
