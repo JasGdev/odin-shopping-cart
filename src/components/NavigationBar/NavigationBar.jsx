@@ -21,6 +21,8 @@ const NavigationBar = () => {
 	let itemCount = 0;
 	items.forEach((item) => (itemCount += item.amount));
 
+	const cartLabel = itemCount == 0? 'Cart' : `${itemCount} in Cart `
+
 	console.log(itemCount);
 
 	return (
@@ -38,7 +40,8 @@ const NavigationBar = () => {
 					Shop
 				</Link>
 				<Link className={styles.link} to="cart">
-					Cart
+					
+					{cartLabel}
 				</Link>
 			</div>
 			<Outlet context={[items, setItems]} />
