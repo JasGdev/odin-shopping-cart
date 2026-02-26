@@ -8,8 +8,16 @@
 .link {
     color: black;
     text-decoration: none;
+    font-size: larger;
+    font-weight: bolder;
+    transition: color 0.4s ease;
 }
 
-.pageDisplay {
-    background-color: aqua;
+.link:hover {
+    color: rgb(63, 63, 63);
+
+}
+
+.pageContainer{
+    height: 100%;
 }

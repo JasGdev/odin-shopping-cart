@@ -1,0 +1,15 @@
+.hero{
+    background-color: rgb(0, 0, 0);
+    min-height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* word-spacing: 0.4rem; */
+    gap: 50px;
+}
+
+
+
+
