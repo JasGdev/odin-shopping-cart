@@ -1,10 +1,11 @@
 import styles from './ShopPage.module.css';
 import { useState, useEffect } from 'react';
 import ItemCard from './ItemCard/ItemCard';
+import {useOutletContext} from 'react-router'
 
 
-
-const ShopPage = ({items, setItems}) => {
+const ShopPage = () => {
+	const [items, setItems] = useOutletContext();
 
 	function setItemAmount(productName, amount){
 		let newItems = items.map((item) => {

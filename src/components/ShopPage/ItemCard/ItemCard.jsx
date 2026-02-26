@@ -19,7 +19,7 @@ const ItemCard = ({
 
 	return (
 		<div className={styles.itemCardContainer}>
-			<img src={item.im} alt={`Image of ${item.name}`} />
+			<img src={item.img} alt={`Image of ${item.name}`} />
 
 			<div className={styles.itemLabel}>
 				{item.name + ` $${item.price}`}
