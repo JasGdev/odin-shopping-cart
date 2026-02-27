@@ -17,7 +17,7 @@ const NavigationBar = () => {
 	const [items, setItems] = useState([]);
 
 	function setItemAmount(productName, amount) {
-		console.log('setting item')
+		console.log(items.find((product) => product.name === productName))
 		let newItems = items.map((item) => {
 			if (item.name === productName) {
 				item.amount = amount;
@@ -34,7 +34,7 @@ const NavigationBar = () => {
 			const data = await response.json();
 
 			const newItems = data.map(
-				(item) => new Product(item.title, item.price, 0, item.image),
+				(item) => new Product(item.title, item.price, null, item.image),
 			);
 			setItems(newItems);
 			

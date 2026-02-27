@@ -28,35 +28,42 @@ const router = createMemoryRouter([
 ]);
 
 async function moveToShop(user) {
-	await user.click(screen.getByRole('link', { name: /shop/i }));
+	await user.click(
+		screen.getByRole('link', { name: /shop/i }),
+	);
 }
 
-async function add5Items(user){
+async function moveToCart(user) {
+	await user.click(
+		screen.getByRole('link', { name: /🛒/i }),
+	);
+}
+
+async function add5Items(user) {
 	const shopLink = screen.getByRole('link', {
-			name: 'Shop',
-		});
-		await user.click(shopLink);
-		const titleEl = await screen.findByText(/Fjallraven/i);
-		const card = titleEl.closest(
-			'div[class^="_itemCardContainer"]',
-		);
+		name: 'Shop',
+	});
+	await user.click(shopLink);
+	const titleEl = await screen.findByText(/Fjallraven/i);
+	const card = titleEl.closest(
+		'div[class^="_itemCardContainer"]',
+	);
 
-		const plusBtn = within(card).getByRole('button', {
-			name: '+',
-		});
-		const minusBtn = within(card).getByRole('button', {
-			name: '-',
-		});
-		const qtyInput = within(card).getByRole('spinbutton');
-		const addToCartBtn = within(card).getByRole('button', {
-			name: '🛒',
-		});
+	const plusBtn = within(card).getByRole('button', {
+		name: '+',
+	});
+	const minusBtn = within(card).getByRole('button', {
+		name: '-',
+	});
+	const qtyInput = within(card).getByRole('spinbutton');
+	const addToCartBtn = within(card).getByRole('button', {
+		name: '🛒',
+	});
 
-		await user.clear(qtyInput);
-		await user.type(qtyInput, '5');
-		await user.click(addToCartBtn);
+	await user.clear(qtyInput);
+	await user.type(qtyInput, '5');
+	await user.click(addToCartBtn);
 }
-
 
 describe('Navigation', () => {
 	it('renders home page', () => {
@@ -69,18 +76,14 @@ describe('Navigation', () => {
 	it('move to shop', async () => {
 		const user = userEvent.setup();
 		render(<RouterProvider router={router} />);
-		await moveToShop(user)
+		await moveToShop(user);
 		expect(router.state.location.pathname).toBe('/shop');
 	});
 
 	it('move to cart', async () => {
 		const user = userEvent.setup();
 		render(<RouterProvider router={router} />);
-		const shopLink = screen.getByRole('link', {
-			name: '🛒',
-		});
-		expect(shopLink).toBeInTheDocument();
-		await user.click(shopLink);
+		await moveToCart(user);
 		expect(router.state.location.pathname).toBe('/cart');
 	});
 });
@@ -89,7 +92,7 @@ describe('Shop Component', () => {
 	it('item loads after moving to shop', async () => {
 		const user = userEvent.setup();
 		render(<RouterProvider router={router} />);
-		await moveToShop(user)
+		await moveToShop(user);
 		expect(
 			await screen.findByText(/Fjallraven/i),
 		).toBeInTheDocument();
@@ -146,9 +149,45 @@ describe('Shop Component', () => {
 		const cartLink = screen.getByRole('link', {
 			name: '🛒',
 		});
-		await add5Items(user)
+		await add5Items(user);
 		expect(cartLink.textContent).toBe('5 in 🛒');
 	});
 });
 
-describe('Cart Component')
+describe('Cart Component', () => {
+	it('empty cart if no items are added', async () => {
+		const user = userEvent.setup();
+		render(<RouterProvider router={router} />);
+		await moveToCart(user);
+		const cartPage = screen.getByRole('region', {
+			name: /cart page/i,
+		});
+		expect(cartPage).toBeInTheDocument();
+		expect(cartPage).toBeEmptyDOMElement();
+	});
+
+	it('filled cart if items are added', async () => {
+		const user = userEvent.setup();
+		render(<RouterProvider router={router} />);
+		await add5Items(user);
+		await moveToCart(user);
+		const cartPage = screen.getByRole('region', {
+			name: /cart page/i,
+		});
+		expect(cartPage).toBeInTheDocument();
+		expect(cartPage).not.toBeEmptyDOMElement();
+		const cartItem = screen.getByRole('group', {
+			name: /Cart Item Fjallraven /i,
+		});
+		expect(cartItem).toBeInTheDocument();
+
+		const plusBtn = within(cartItem).getByRole('button', {
+			name: '+',
+		});
+		const minusBtn = within(cartItem).getByRole('button', {
+			name: '-',
+		});
+		const qtyInput = within(cartItem).getByRole('spinbutton');
+		
+	});
+});

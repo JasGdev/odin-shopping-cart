@@ -1,8 +1,15 @@
-import styles from "./CartItem.module.css";
-import { useState } from "react";
+import { useOutletContext } from 'react-router';
+import styles from './CartItem.module.css';
+import { useState, useEffect} from 'react';
 
-const CartItem = ({ item }) => {
-	const [itemCount, setItemCount] = useState([item.amount]);
+const CartItem = ({ item, ariaLabel, role }) => {
+
+	const [items, setItems, setItemAmount] = useOutletContext();
+	const [itemCount, setItemCount] = useState(item.amount);
+
+	useEffect (() => {
+		setItemAmount(item.name, Number(itemCount))
+	}, [itemCount])
 
 	const handleDecrement = () => {
 		if (itemCount > 0) {
@@ -11,18 +18,30 @@ const CartItem = ({ item }) => {
 	};
 
 	return (
-		<div className={styles.cartItemContainer}>
+		<div
+			className={styles.cartItemContainer}
+			aria-label={ariaLabel}
+			role={role}
+		>
 			<div className={styles.cartItemImgContainer}>
 				<img src={item.img} alt="" />
 			</div>
 
 			<div className={styles.control}>
 				<div className={styles.name}>{item.name}</div>
-				<button className={styles.delete}>X</button>
+				<button onClick={() => setItemAmount(item.name, null)} className={styles.delete}>X</button>
 				<div className={styles.inputDiv}>
-					<button>+</button>
-					<button>-</button>
-					<input type="number" value={item.amount} onChange={(e) => setItemCount(item.name, e.target.value)}/>
+					<button onClick={ () => setItemCount(prev => Number(prev) + 1)}>+</button>
+					<button onClick={handleDecrement}>-</button>
+					<input
+						type="number"
+						value={itemCount}
+						onChange={(e) =>
+							setItemCount(e.target.value)
+						}
+						onBlur={(e) =>
+							{setItemAmount(item.name, Number(e.target.value))}}
+					/>
 				</div>
 			</div>
 		</div>

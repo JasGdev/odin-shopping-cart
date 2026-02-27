@@ -5,11 +5,10 @@ import styles from "./CartPage.module.css"
 const CartPage = () => {
 	const [items, setItems, setItemAmount] = useOutletContext();
 	return (
-		<div className={styles.CartPageContainer}>
+		<div className={styles.CartPageContainer} aria-label="Cart Page" role="region">
 			{items.map((item) => {
-                if (item.amount > 0){
-                    return <CartItem key={item.name} item={item} />;
-
+                if (item.amount !== null){
+                    return <CartItem key={item.name} item={item} ariaLabel={`Cart Item ${item.name}`} role="group"/>;
                 }
 				
 			})}

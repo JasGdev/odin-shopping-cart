@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router";
 const ItemCard = ({item}) => {
 	const [items, setItems, setItemAmount] = useOutletContext();
 
-	const [itemCount, setItemCount] = useState([item.amount]);
+	const [itemCount, setItemCount] = useState(0);
 	
 
 	const handleDecrement = () => {
