@@ -1,7 +1,7 @@
 import styles from "./CartItem.module.css";
 import { useState } from "react";
 
-const CartItem = ({ setItemAmount, item }) => {
+const CartItem = ({ item }) => {
 	const [itemCount, setItemCount] = useState([item.amount]);
 
 	const handleDecrement = () => {
@@ -22,7 +22,7 @@ const CartItem = ({ setItemAmount, item }) => {
 				<div className={styles.inputDiv}>
 					<button>+</button>
 					<button>-</button>
-					<input type="number" />
+					<input type="number" value={item.amount} onChange={(e) => setItemCount(item.name, e.target.value)}/>
 				</div>
 			</div>
 		</div>

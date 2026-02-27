@@ -3,7 +3,7 @@ import CartItem from "./CartItem/CartItem";
 import styles from "./CartPage.module.css"
 
 const CartPage = () => {
-	const [items, setItemAmount] = useOutletContext();
+	const [items, setItems, setItemAmount] = useOutletContext();
 	return (
 		<div className={styles.CartPageContainer}>
 			{items.map((item) => {
