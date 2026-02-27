@@ -50,7 +50,7 @@ const NavigationBar = () => {
 
 	items.forEach((item) => (itemCount += item.amount));
 
-	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒 `;
+	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒`;
 
 	return (
 		<div className={styles.pageContainer}>
