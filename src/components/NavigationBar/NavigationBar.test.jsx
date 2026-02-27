@@ -132,9 +132,6 @@ describe('Shop Component', () => {
 		await user.click(minusBtn);
 		expect(qtyInput).toHaveValue(2);
 		await user.type(qtyInput, '5');
-		expect(qtyInput).toHaveValue(25);
-		await user.clear(qtyInput);
-		await user.type(qtyInput, '5');
 		expect(qtyInput).toHaveValue(5);
 
 		// adding to cart to update the cart label

@@ -16,8 +16,6 @@ const ItemCard = ({item}) => {
 	};
 
 	const handleAddToCart = () => {
-		console.log(item.name)
-		console.log(item.amount)
 		setItemAmount(item.name, item.amount + Number(itemCount))
 	}
 
@@ -49,6 +47,7 @@ const ItemCard = ({item}) => {
 					id=""
 					value={itemCount}
 					onChange={(e) => setItemCount(e.target.value)}
+					onFocus={(e) => e.target.select()}
 				/>
 				<button onClick={handleAddToCart} className={styles.addToCart}>
 					🛒

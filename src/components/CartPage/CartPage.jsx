@@ -10,7 +10,6 @@ const CartPage = () => {
                 if (item.amount !== null){
                     return <CartItem key={item.name} item={item} ariaLabel={`Cart Item ${item.name}`} role="group"/>;
                 }
-				
 			})}
 		</div>
 	);
