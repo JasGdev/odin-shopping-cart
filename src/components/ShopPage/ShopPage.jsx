@@ -4,7 +4,7 @@ import ItemCard from "./ItemCard/ItemCard";
 import { useOutletContext } from "react-router";
 
 const ShopPage = () => {
-	const [items, setItemAmount] = useOutletContext();
+	const [items, setItems, setItemAmount] = useOutletContext();
 
 	return (
 		<div className={styles.shopContainer}>
@@ -18,7 +18,6 @@ const ShopPage = () => {
 						<ItemCard
 							key={item.name}
 							item={item}
-							setItemAmount={setItemAmount}
 						/>
 					);
 				})}

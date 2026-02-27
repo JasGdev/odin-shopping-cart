@@ -1,9 +1,11 @@
 import styles from './ItemCard.module.css';
 import { useState } from 'react';
+import { useOutletContext } from "react-router";
 
-const ItemCard = ({
-	item, setItemAmount
-}) => {
+
+const ItemCard = ({item}) => {
+	const [items, setItems, setItemAmount] = useOutletContext();
+
 	const [itemCount, setItemCount] = useState([item.amount]);
 	
 
@@ -14,6 +16,8 @@ const ItemCard = ({
 	};
 
 	const handleAddToCart = () => {
+		console.log(item.name)
+		console.log(item.amount)
 		setItemAmount(item.name, item.amount + Number(itemCount))
 	}
 

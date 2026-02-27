@@ -17,6 +17,7 @@ const NavigationBar = () => {
 	const [items, setItems] = useState([]);
 
 	function setItemAmount(productName, amount) {
+		console.log('setting item')
 		let newItems = items.map((item) => {
 			if (item.name === productName) {
 				item.amount = amount;
@@ -45,6 +46,8 @@ const NavigationBar = () => {
 
 	let itemCount = 0;
 
+	console.log(items)
+
 	items.forEach((item) => (itemCount += item.amount));
 
 	const cartLabel = itemCount == 0 ? "🛒" : `${itemCount} in 🛒 `;
@@ -66,4 +69,5 @@ const NavigationBar = () => {
 		</div>
 	);
 };
+
 export default NavigationBar;

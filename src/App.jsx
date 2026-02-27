@@ -1,15 +1,11 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 
 import PropTypes from 'prop-types';
 
 function App() {
-
-  return (
-    <>
-      
-    </>
-  )
+	return <>Nav</>;
 }
 
-export default App
+export default App;
