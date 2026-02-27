@@ -17,7 +17,6 @@ const NavigationBar = () => {
 	const [items, setItems] = useState([]);
 
 	function setItemAmount(productName, amount) {
-		console.log(items.find((product) => product.name === productName))
 		let newItems = items.map((item) => {
 			if (item.name === productName) {
 				item.amount = amount;
@@ -46,7 +45,6 @@ const NavigationBar = () => {
 
 	let itemCount = 0;
 
-	console.log(items)
 
 	items.forEach((item) => (itemCount += item.amount));
 
